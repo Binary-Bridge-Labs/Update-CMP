@@ -5,15 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.play.core.appupdate.AppUpdateInfo
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
+
 import com.google.android.ump.FormError
 import com.itg.demoinappupdate.databinding.ActivityMainBinding
 import com.itg.iaumodule.IAdConsentCallBack
 import com.itg.iaumodule.ITGAdConsent
-import com.itg.iaumodule.IUpdateInstanceCallback
-import com.itg.iaumodule.ITGUpdateManager
 
 
 class MainActivity : AppCompatActivity(), IAdConsentCallBack {
@@ -27,10 +23,10 @@ class MainActivity : AppCompatActivity(), IAdConsentCallBack {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.buttonCheckGgFlex.setOnClickListener {
-            updateWithType(AppUpdateType.FLEXIBLE, isShowDialogUpdate)
+//            updateWithType(AppUpdateType.FLEXIBLE, isShowDialogUpdate)
         }
         binding.buttonCheckUpdateGgImmediate.setOnClickListener {
-            updateWithType(AppUpdateType.IMMEDIATE, isShowDialogUpdate)
+//            updateWithType(AppUpdateType.IMMEDIATE, isShowDialogUpdate)
         }
         binding.buttonLoadConsent.setOnClickListener {
             ITGAdConsent.loadAndShowConsent(false,this)
@@ -50,21 +46,21 @@ class MainActivity : AppCompatActivity(), IAdConsentCallBack {
         }
     }
 
-    private fun updateWithType(type: Int, isShowDialogUpdate: Boolean) {
-        if (isShowDialogUpdate) ITGUpdateManager(this, 100, object : IUpdateInstanceCallback {
-            override fun updateAvailableListener(updateAvailability: AppUpdateInfo): Int {
-                when (updateAvailability.updateAvailability()) {
-                    UpdateAvailability.UPDATE_AVAILABLE -> {
-                        // Need to show Dialog check option then return type
-                        return type
-                    }
-
-                }
-                return AppUpdateType.FLEXIBLE
-            }
-
-        }).checkUpdateAvailable()
-    }
+//    private fun updateWithType(type: Int, isShowDialogUpdate: Boolean) {
+//        if (isShowDialogUpdate) ITGUpdateManager(this, 100, object : IUpdateInstanceCallback {
+//            override fun updateAvailableListener(updateAvailability: AppUpdateInfo): Int {
+//                when (updateAvailability.updateAvailability()) {
+//                    UpdateAvailability.UPDATE_AVAILABLE -> {
+//                        // Need to show Dialog check option then return type
+//                        return type
+//                    }
+//
+//                }
+//                return AppUpdateType.FLEXIBLE
+//            }
+//
+//        }).checkUpdateAvailable()
+//    }
 
     override fun getCurrentActivity(): Activity {
         return this@MainActivity
